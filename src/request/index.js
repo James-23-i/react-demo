@@ -1,8 +1,6 @@
 import Axios from 'axios'
 import { baseURL } from './config'
 
-import { message } from 'antd'
-
 const instance = Axios.create({
   baseURL,
   timeout: 5000,

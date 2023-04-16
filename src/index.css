@@ -1,0 +1,8 @@
+.childDivClassName {
+  display: flex;
+  flex-direction: column;
+}
+
+/* body {
+  height: 1800px !important;
+} */

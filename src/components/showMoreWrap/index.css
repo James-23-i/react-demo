@@ -1,0 +1,19 @@
+/** 
+
+index.less
+全局生效，要注意是否会覆盖全局样式
+
+index.module.less
+模块作用，只会在当前模块生效，不会作用到全局
+
+*/
+
+.wrapDiv {
+  position: relative;
+  overflow: hidden;
+}
+
+.moreSpan {
+  color: skyblue;
+  cursor: pointer;
+}

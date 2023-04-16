@@ -3,13 +3,13 @@ import { Modal } from 'antd'
 import { TPaginationInfo } from '../../../api/mock/queryDataSource'
 import QkTable from './QkTable'
 import SearchForm from './SearchForm'
-import { TModel } from '../../../setting/model'
+import { TConfig } from '../../../setting/config'
 import useTableData from '../../hooks/useTableData'
 
 type TQkModal<RequestForm, ResponseData> = {
   title: string
   isVisible: boolean
-  model: TModel[]
+  config: TConfig
   tableRowKey: string
   onCancel: () => void
   queryDataSource: (
@@ -23,7 +23,7 @@ type TQkModal<RequestForm, ResponseData> = {
 const QkModal = <RequestForm, ResponseData extends Record<string, unknown>>({
   title,
   isVisible,
-  model,
+  config,
   tableRowKey,
   onCancel,
   isMultiple,
@@ -43,7 +43,7 @@ const QkModal = <RequestForm, ResponseData extends Record<string, unknown>>({
   return (
     <Modal
       title={title}
-      width={700}
+      width={1024}
       centered
       visible={isVisible}
       onCancel={onCancel}
@@ -56,13 +56,13 @@ const QkModal = <RequestForm, ResponseData extends Record<string, unknown>>({
       }}
     >
       <SearchForm<RequestForm>
-        model={model}
+        config={config}
         queryDataSource={queryTableData}
       ></SearchForm>
       {isMultiple ? (
         <QkTable<ResponseData>
           tableRowKey={tableRowKey}
-          model={model}
+          config={config}
           loading={loading}
           pageInfo={pageInfo}
           onPaginationChange={onPaginationChange}
@@ -73,7 +73,7 @@ const QkModal = <RequestForm, ResponseData extends Record<string, unknown>>({
       ) : (
         <QkTable<ResponseData>
           tableRowKey={tableRowKey}
-          model={model}
+          config={config}
           loading={loading}
           pageInfo={pageInfo}
           onPaginationChange={onPaginationChange}

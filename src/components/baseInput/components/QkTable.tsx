@@ -1,11 +1,11 @@
 import { Table } from 'antd'
 import React, { useState } from 'react'
 import { TPaginationInfo } from '../../../api/mock/queryDataSource'
-import { TModel } from '../../../setting/model'
+import { TConfig } from '../../../setting/config'
 import { TPageInfo } from '../../hooks/useTableData'
 
 type TQkTable<ResponseData> = {
-  model: TModel[]
+  config: TConfig
   dataSource: ResponseData[]
   loading: boolean
   tableRowKey: string
@@ -17,7 +17,7 @@ type TQkTable<ResponseData> = {
 )
 
 const QkTable = <ResponseData extends Record<string, unknown>>({
-  model,
+  config,
   dataSource,
   loading,
   pageInfo,
@@ -27,20 +27,6 @@ const QkTable = <ResponseData extends Record<string, unknown>>({
   onPaginationChange,
 }: TQkTable<ResponseData>) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
-
-  const getColumns = () => {
-    return model
-      .filter(({ isFormItem }) => !isFormItem)
-      .map(({ field, label }) => {
-        return {
-          title: label,
-          key: field,
-          dataIndex: field,
-        }
-      })
-  }
-
-  const columns = getColumns()
 
   return (
     <Table<ResponseData>
@@ -71,7 +57,7 @@ const QkTable = <ResponseData extends Record<string, unknown>>({
           })
         },
       }}
-      columns={columns}
+      columns={config.columns}
       dataSource={dataSource}
     />
   )

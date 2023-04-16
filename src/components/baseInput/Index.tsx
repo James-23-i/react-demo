@@ -1,9 +1,8 @@
-import type {} from 'antd'
 import React, { useState } from 'react'
 import { Input } from 'antd'
 import QkModal from './components/QkModal'
 import { TPaginationInfo } from '../../api/mock/queryDataSource'
-import { TModel } from '../../setting/model'
+import { TConfig } from '../../setting/config'
 
 type TBaseInput = {
   onInputClick: () => void
@@ -12,7 +11,7 @@ type TBaseInput = {
 type TBaseInputWithModal<RequestForm, ResponseData> = {
   title: string
   tableRowKey: string
-  model: TModel[]
+  config: TConfig
   queryDataSource: (
     formValues: RequestForm
   ) => Promise<{ dataSource: ResponseData[]; paginationInfo: TPaginationInfo }>
@@ -31,7 +30,7 @@ const BaseInputWithModal = <
 >({
   title,
   tableRowKey,
-  model,
+  config,
   queryDataSource,
   isMultiple,
   onSelectedChange,
@@ -48,7 +47,7 @@ const BaseInputWithModal = <
             isMultiple={true}
             title={title}
             isVisible={isVisible}
-            model={model}
+            config={config}
             onCancel={() => setIsVisible(false)}
             queryDataSource={queryDataSource}
             onSelectedChange={(data) => onSelectedChange(data)}
@@ -59,7 +58,7 @@ const BaseInputWithModal = <
             isMultiple={false}
             title={title}
             isVisible={isVisible}
-            model={model}
+            config={config}
             onCancel={() => setIsVisible(false)}
             queryDataSource={queryDataSource}
             onSelectedChange={(data) => onSelectedChange(data)}
